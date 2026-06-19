@@ -1,0 +1,183 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Адмін Панель - Wheels Up</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/dashboard.css' %}">
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="header-left">
+                <a href="/" class="logo">Wheels Up</a>
+            </div>
+            <nav class="header-nav">
+                <span class="user-info">👤 {{ user.first_name }} {{ user.last_name }}</span>
+                <span class="admin-badge">🔐 АДМІНІСТРАТОР</span>
+                <a href="{% url 'profile' %}" class="nav-link">Профіль</a>
+                <a href="{% url 'logout' %}" class="nav-link logout">Вихід</a>
+            </nav>
+        </header>
+
+        <main class="dashboard-container">
+            <div class="sidebar">
+                <div class="sidebar-menu">
+                    <a href="{% url 'admin_dashboard' %}" class="menu-item active">📊 Панель</a>
+                    <a href="#all-orders" class="menu-item">📋 Всі Замовлення</a>
+                    <a href="#statistics" class="menu-item">📈 Статистика</a>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <section class="hero-section">
+                    <h1>Адміністративна Панель 🔐</h1>
+                    <p>Управління системою та замовленнями</p>
+                </section>
+
+                <section class="stats-section" id="statistics">
+                    <h2>📈 Статистика</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card primary">
+                            <div class="stat-number">{{ all_orders|length }}</div>
+                            <div class="stat-label">Всього Замовлень</div>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="stat-number">{{ pending_orders }}</div>
+                            <div class="stat-label">Очікуючих</div>
+                        </div>
+                        <div class="stat-card success">
+                            <div class="stat-number">{{ completed_orders }}</div>
+                            <div class="stat-label">Завершених</div>
+                        </div>
+                        <div class="stat-card info">
+                            <div class="stat-number">{{ drivers_count }}</div>
+                            <div class="stat-label">Водіїв</div>
+                        </div>
+                        <div class="stat-card info">
+                            <div class="stat-number">{{ customers_count }}</div>
+                            <div class="stat-label">Заказчиків</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="orders-section" id="all-orders">
+                    <h2>📋 Всі Замовлення</h2>
+                    <div class="table-wrapper">
+                        <table class="orders-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Заказчик</th>
+                                    <th>Водій</th>
+                                    <th>Звідки → Куди</th>
+                                    <th>Статус</th>
+                                    <th>Дата</th>
+                                    <th>Дія</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in all_orders %}
+                                    <tr>
+                                        <td>
+                                            <strong>#{{ order.id }}</strong>
+                                        </td>
+                                        <td>
+                                            {{ order.customer.first_name }} {{ order.customer.last_name }}
+                                            <br>
+                                            <small>{{ order.customer.profile.phone }}</small>
+                                        </td>
+                                        <td>
+                                            {% if order.driver %}
+                                                {{ order.driver.first_name }} {{ order.driver.last_name }}
+                                            {% else %}
+                                                <em>—</em>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <small>
+                                                {{ order.pickup_location|truncatechars:20 }}<br>
+                                                ↓<br>
+                                                {{ order.dropoff_location|truncatechars:20 }}
+                                            </small>
+                                        </td>
+                                        <td>
+                                            <span class="status-badge status-{{ order.status }}">
+                                                {{ order.get_status_display }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <small>{{ order.created_at|date:"d.m.Y H:i" }}</small>
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'order_detail' order.id %}" class="btn-small">Переглянути</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <style>
+            .table-wrapper {
+                overflow-x: auto;
+                background-color: #ffffff;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            }
+
+            .orders-table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 14px;
+            }
+
+            .orders-table thead {
+                background-color: #f5f5f5;
+                border-bottom: 2px solid #e0e0e0;
+            }
+
+            .orders-table th {
+                padding: 16px;
+                text-align: left;
+                font-weight: 600;
+                color: #111111;
+            }
+
+            .orders-table td {
+                padding: 16px;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            .orders-table tbody tr:hover {
+                background-color: #f9f9f9;
+            }
+
+            .btn-small {
+                padding: 8px 12px;
+                background-color: #667eea;
+                color: #ffffff;
+                border-radius: 6px;
+                text-decoration: none;
+                font-size: 12px;
+                transition: all 0.2s ease;
+            }
+
+            .btn-small:hover {
+                background-color: #764ba2;
+            }
+
+            .admin-badge {
+                background: linear-gradient(135deg, #f57c00 0%, #d32f2f 100%);
+                color: #ffffff;
+                padding: 6px 12px;
+                border-radius: 20px;
+                font-size: 12px;
+                font-weight: 600;
+            }
+        </style>
+    </body>
+</html>

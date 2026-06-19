@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Замовлення #{{ order.id }} - Wheels Up</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/orders.css' %}">
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="header-left">
+                <a href="/" class="logo">Wheels Up</a>
+            </div>
+            <nav class="header-nav">
+                <a href="{% url 'dashboard' %}" class="nav-link">← Назад в Кабінет</a>
+                <a href="{% url 'logout' %}" class="nav-link logout">Вихід</a>
+            </nav>
+        </header>
+
+        <main class="order-container">
+            <div class="order-detail-card">
+                <div class="order-header">
+                    <div>
+                        <h1>Замовлення #{{ order.id }}</h1>
+                        <p class="order-date">{{ order.created_at|date:"d.m.Y H:i" }}</p>
+                    </div>
+                    <div class="status-badge-large status-{{ order.status }}">
+                        {{ order.get_status_display }}
+                    </div>
+                </div>
+
+                <div class="order-details">
+                    <section class="detail-section">
+                        <h2>👤 Інформація про Заказчика</h2>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="label">Ім'я:</span>
+                                <span class="value">{{ order.customer.first_name }} {{ order.customer.last_name }}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Email:</span>
+                                <span class="value">{{ order.customer.email }}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Телефон:</span>
+                                <span class="value">{{ order.customer.profile.phone }}</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="detail-section">
+                        <h2>📍 Маршрут</h2>
+                        <div class="route-box">
+                            <div class="route-point pickup">
+                                <span class="route-icon">📍</span>
+                                <div class="route-details">
+                                    <span class="route-label">Звідки:</span>
+                                    <span class="route-value">{{ order.pickup_location }}</span>
+                                </div>
+                            </div>
+                            <div class="route-arrow">↓</div>
+                            <div class="route-point dropoff">
+                                <span class="route-icon">🚩</span>
+                                <div class="route-details">
+                                    <span class="route-label">Куди:</span>
+                                    <span class="route-value">{{ order.dropoff_location }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="detail-section">
+                        <h2>🚗 Деталі Замовлення</h2>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="label">Тип Послуги:</span>
+                                <span class="value">{{ order.get_service_type_display }}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Статус:</span>
+                                <span class="value">
+                                    <span class="status-badge status-{{ order.status }}">
+                                        {{ order.get_status_display }}
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Орієнтовна Вартість:</span>
+                                <span class="value">{{ order.estimated_price|default:"Не визначена" }} ₴</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Остаточна Вартість:</span>
+                                <span class="value">{{ order.final_price|default:"Поки не розраховується" }} ₴</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    {% if order.driver %}
+                        <section class="detail-section">
+                            <h2>🚙 Інформація про Водія</h2>
+                            <div class="driver-box">
+                                <div class="driver-info">
+                                    <h3>{{ order.driver.first_name }} {{ order.driver.last_name }}</h3>
+                                    <div class="info-grid">
+                                        <div class="info-item">
+                                            <span class="label">Рейтинг:</span>
+                                            <span class="value">⭐ {{ order.driver.profile.rating }}/5.0</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="label">Телефон:</span>
+                                            <span class="value">{{ order.driver.profile.phone }}</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="label">Статус:</span>
+                                            <span class="value">
+                                                {% if order.status == 'pending' %}
+                                                    ⏳ Очікує прийняття
+                                                {% elif order.status == 'accepted' %}
+                                                    ✓ Прийнято
+                                                {% elif order.status == 'in_progress' %}
+                                                    🚗 Їде до вас
+                                                {% elif order.status == 'completed' %}
+                                                    ✓ Завершено
+                                                {% endif %}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    {% endif %}
+
+                    {% if order.notes %}
+                        <section class="detail-section">
+                            <h2>📝 Примітки</h2>
+                            <div class="notes-box">
+                                {{ order.notes }}
+                            </div>
+                        </section>
+                    {% endif %}
+                </div>
+
+                <div class="action-buttons">
+                    {% if user == order.customer and order.status == 'pending' %}
+                        <form method="POST" action="{% url 'dashboard' %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-danger">❌ Скасувати Замовлення</button>
+                        </form>
+                    {% endif %}
+                    <a href="{% url 'dashboard' %}" class="btn-secondary">← Назад</a>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

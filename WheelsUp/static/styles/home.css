@@ -329,6 +329,157 @@ body {
     font-size: 15px;
 }
 
+.registration-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 60px 24px;
+    margin-top: 80px;
+    color: #ffffff;
+}
+
+.registration-container {
+    max-width: 1180px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.registration-section h2 {
+    font-size: 40px;
+    margin: 0 0 12px;
+    color: #ffffff;
+}
+
+.registration-section > p {
+    font-size: 18px;
+    margin: 0 0 40px;
+    color: #ffffff;
+    opacity: 0.9;
+}
+
+.registration-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.reg-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 32px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.reg-card:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-8px);
+}
+
+.reg-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.reg-card h3 {
+    font-size: 22px;
+    margin: 0 0 12px;
+    color: #ffffff;
+}
+
+.reg-card p {
+    font-size: 14px;
+    margin: 0 0 20px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+}
+
+.btn-register {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #667eea;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.btn-register:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.cta-banner {
+    background-color: #1a1a1a;
+    padding: 80px 24px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.cta-banner-container {
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.cta-banner h2 {
+    font-size: 48px;
+    font-weight: 700;
+    margin: 0 0 16px;
+    color: #ffffff;
+}
+
+.cta-banner p {
+    font-size: 18px;
+    margin: 0 0 40px;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-banner-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 16px 40px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    border: none;
+}
+
+.cta-button-primary {
+    background-color: #111111;
+    color: #ffffff;
+}
+
+.cta-button-primary:hover {
+    background-color: #333333;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+.cta-button-secondary {
+    background-color: #ffffff;
+    color: #111111;
+}
+
+.cta-button-secondary:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(255, 255, 255, 0.2);
+}
+
 @media (max-width: 980px) {
     .hero-section {
         grid-template-columns: 1fr;

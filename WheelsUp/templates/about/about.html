@@ -1,0 +1,183 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Про нас - Wheels Up</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/about.css' %}">
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="header-left">
+                <div class="logo">Wheels Up</div>
+                <p class="tagline">Таксі та доставка, які працюють для вас 24/7</p>
+            </div>
+            <nav class="header-nav">
+                <a href="/" class="nav-tab">Головна</a>
+                <a href="/services/" class="nav-tab">Послуги</a>
+                <button class="nav-tab active" type="button">Про нас</button>
+                <a href="/contacts/" class="nav-tab">Контакти</a>
+            </nav>
+        </header>
+
+        <main class="page-container">
+            <section class="about-hero">
+                <h1>Про Wheels Up</h1>
+                <p>Ми - сучасна служба перевезень, яка змінює правила гри в транспортній індустрії</p>
+            </section>
+
+            <section class="about-mission">
+                <div class="mission-card">
+                    <h2>Наша Місія</h2>
+                    <p>Забезпечити швидкий, безпечний та надійний транспорт для кожного мешканця міста, роблячи мобільність доступною та простою для всіх.</p>
+                </div>
+                <div class="mission-card">
+                    <h2>Наша Візія</h2>
+                    <p>Стати найпрефератнішою службою перевезень, відомою своєю якістю обслуговування, інноваціями та відданістю до задоволення клієнтів.</p>
+                </div>
+                <div class="mission-card">
+                    <h2>Наші Цінності</h2>
+                    <p>Безпека, надійність, прозорість та гідне ставлення до всіх - водіїв, пасажирів та партнерів. Кожна поїздка - це обіцянка якості.</p>
+                </div>
+            </section>
+
+            <section class="story-section">
+                <h2>Наша Історія</h2>
+                <p>Wheels Up була заснована у 2020 році з простою ідеєю - зробити таксі-сервіс кращим. Ми розпочали з невеликої команди ентузіастів, які були засмучені якістю доступних послуг.</p>
+                <p>За кілька років ми зросли до однієї з найбільших служб перевезень у місті, завоювавши довіру більше за 100 000 регулярних клієнтів. Наша відданість до якості та інновацій дозволила нам стати лідером індустрії.</p>
+                <p>Сьогодні Wheels Up - це не просто таксі-сервіс, а справжній партнер для мільйонів поїздок щодня. Ми продовжуємо інвестувати в нові технології, навчання водіїв та поліпшення нашої служби.</p>
+            </section>
+
+            <section class="achievements-section">
+                <h2>Наші Досягнення</h2>
+                <div class="achievements-grid">
+                    <div class="achievement-item">
+                        <div class="achievement-number">100K+</div>
+                        <p>Задоволених клієнтів</p>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-number">50M+</div>
+                        <p>Безпечних поїздок</p>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-number">4.8★</div>
+                        <p>Рейтинг від клієнтів</p>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-number">24/7</div>
+                        <p>Підтримка клієнтів</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="team-section">
+                <h2>Наша Команда</h2>
+                <p>Wheels Up складається з профільних фахівців, які прагнуть надавати найкращий сервіс</p>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-avatar">👨‍💼</div>
+                        <h3>Ігор Петренко</h3>
+                        <p>Засновник та CEO</p>
+                        <span class="member-bio">20+ років досвіду в логістиці та транспорті</span>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">👩‍💼</div>
+                        <h3>Марія Коваленко</h3>
+                        <p>Директор операцій</p>
+                        <span class="member-bio">15+ років управління великими командами</span>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">👨‍💻</div>
+                        <h3>Андрій Семенов</h3>
+                        <p>Директор технологій</p>
+                        <span class="member-bio">CTO з досвідом у мобільних додатках</span>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">👩‍⚖️</div>
+                        <h3>Катерина Іванова</h3>
+                        <p>Директор сервісу</p>
+                        <span class="member-bio">Експерт у задоволенні клієнтів</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="values-section">
+                <h2>Чому нас обирають?</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">✅</div>
+                        <h3>Безпека</h3>
+                        <p>Усі водії мають ліцензії та проходять перевірку безпеки. Ваша безпека - наш пріоритет.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">⚡</div>
+                        <h3>Швидкість</h3>
+                        <p>Підання від 3 хвилин в середньому. Найшвидша служба у місті.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">💰</div>
+                        <h3>Прозорість</h3>
+                        <p>Фіксовані ціни, без прихованих платежів. Знайте вартість перед замовленням.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">🎯</div>
+                        <h3>Якість</h3>
+                        <p>Чисті автомобілі, ввічливі водії, комфортні поїздки - гарантовано.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">🌟</div>
+                        <h3>Надійність</h3>
+                        <p>Працюємо 24/7. Завжди доступні коли вам потрібні.</p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">💬</div>
+                        <h3>Підтримка</h3>
+                        <p>Команда підтримки готова допомогти у будь-який час.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cta-section">
+                <h2>Приєднайтеся до Wheels Up</h2>
+                <p>Стайте частиною найбільш успішної служби перевезень</p>
+                <div class="cta-buttons">
+                    <button class="primary-button">Замовити таксі</button>
+                    <button class="secondary-button">Стати водієм</button>
+                </div>
+            </section>
+
+            <section class="registration-section">
+                <div class="registration-container">
+                    <h2>Готові почати?</h2>
+                    <p>Виберіть роль та зареєструйтеся прямо зараз</p>
+                    <div class="registration-buttons">
+                        <div class="reg-card">
+                            <div class="reg-icon">🛑</div>
+                            <h3>Заказчик</h3>
+                            <p>Замовляйте такси та доставку в два клаші</p>
+                            <a href="{% url 'register_customer' %}" class="btn-register">Реєстрація</a>
+                        </div>
+                        <div class="reg-card">
+                            <div class="reg-icon">🚗</div>
+                            <h3>Водій</h3>
+                            <p>Приєднайтеся до нашої команди та заробляйте</p>
+                            <a href="{% url 'register_driver' %}" class="btn-register">Реєстрація</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cta-banner">
+                <div class="cta-banner-container">
+                    <h2>Приєднайтеся до Wheels Up</h2>
+                    <p>Стайте частиною найбільш успішної служби перевезень</p>
+                    <div class="cta-banner-buttons">
+                        <a href="{% url 'register_customer' %}" class="cta-button cta-button-primary">Замовити такси</a>
+                        <a href="{% url 'register_driver' %}" class="cta-button cta-button-secondary">Стати водієм</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Wheels Up{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/base.css' %}"> {# A new base.css might be useful later #}
+        {% block extra_css %}{% endblock %}
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="header-left">
+                <div class="logo">Wheels Up</div>
+                <p class="tagline">Таксі та доставка, які працюють для вас 24/7</p>
+            </div>
+            <nav class="header-nav">
+                <a href="{% url 'home' %}" class="nav-tab">Головна</a>
+                <a href="{% url 'services' %}" class="nav-tab">Послуги</a>
+                <a href="{% url 'about' %}" class="nav-tab">Про нас</a>
+                <a href="{% url 'contacts' %}" class="nav-tab">Контакти</a>
+                <a href="{% url 'login' %}" class="nav-tab">Увійти</a>
+            </nav>
+        </header>
+
+        <main class="page-container">
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        {% block extra_js %}{% endblock %}
+    </body>
+</html>

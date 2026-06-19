@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Сповіщення - Wheels Up</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/orders.css' %}">
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="header-left">
+                <a href="/" class="logo">Wheels Up</a>
+            </div>
+            <nav class="header-nav">
+                <a href="{% url 'dashboard' %}" class="nav-link">← Назад в Кабінет</a>
+                <a href="{% url 'logout' %}" class="nav-link logout">Вихід</a>
+            </nav>
+        </header>
+
+        <main class="order-container">
+            <div class="notifications-card">
+                <h1>🔔 Сповіщення</h1>
+                <p class="subtitle">Усі ваші сповіщення про замовлення та оновлення</p>
+
+                {% if notifications %}
+                    <div class="notifications-list">
+                        {% for notification in notifications %}
+                            <div class="notification-card">
+                                <div style="display: flex; justify-content: space-between; align-items: start;">
+                                    <div>
+                                        <h3>Замовлення #{{ notification.order.id }}</h3>
+                                        <p>{{ notification.message|linebreaks }}</p>
+                                        <div class="notification-time">{{ notification.created_at|date:"d.m.Y H:i" }}</div>
+                                    </div>
+                                    <a href="{% url 'order_detail' notification.order.id %}" class="btn-secondary" style="white-space: nowrap; margin-left: 16px;">Переглянути</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="empty-notifications">
+                        <p>📭 У вас немає сповіщень</p>
+                        <p>Сповіщення з'являтимуться тут, коли станеться щось важливе</p>
+                        <a href="{% url 'dashboard' %}" class="btn-primary" style="margin-top: 20px; display: inline-block;">← Назад в Кабінет</a>
+                    </div>
+                {% endif %}
+            </div>
+        </main>
+    </body>
+</html>

@@ -1,49 +1,23 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="uk">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Wheels Up</title>
-        <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css' %}">
-    </head>
-    <body>
-        <header class="site-header">
-            <div class="header-left">
-                <div class="logo">Wheels Up</div>
-                <p class="tagline">Таксі та доставка, які працюють для вас 24/7</p>
-            </div>
-            <nav class="header-nav">
-                <button class="nav-tab active" type="button">Головна</button>
-                <button class="nav-tab" type="button">Послуги</button>
-                <button class="nav-tab" type="button">Про нас</button>
-                <button class="nav-tab" type="button">Контакти</button>
-            </nav>
-        </header>
 
-        <main class="page-container">
+{% block title %}Home - Wheels Up{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css' %}">
+{% endblock %}
+
+{% block content %}
             <section id="hero" class="hero-section">
                 <div class="hero-copy">
                     <h1>Wheels Up Taxi Service</h1>
                     <p>Швидкі, безпечні поїздки по місту, термінова доставка і вантажні перевезення. Обирай комфортний сервіс для себе та свого бізнесу.</p>
                     <div class="hero-actions">
-                        <button class="primary-button">Замовити зараз</button>
-                        <button class="secondary-button">Дізнатися більше</button>
+                        <a href="{% url 'register' %}" class="primary-button">Замовити зараз</a>
+                        <a href="{% url 'services' %}" class="secondary-button">Дізнатися більше</a>
                     </div>
                 </div>
-                <div class="hero-form-card">
-                    <h2>Замовити таксі</h2>
-                    <div class="dropdown">
-                        <button class="dropbtn" type="button">Забрати зараз ▽</button>
-                        <div class="dropdown-content">
-                            <button class="dropdown-item" type="button">Забрати зараз</button>
-                            <button class="dropdown-item" type="button">Забрати пізніше</button>
-                        </div>
-                    </div>
-                    <input type="text" class="textfield" placeholder="Точка відправлення">
-                    <input type="text" class="textfield" placeholder="Куди поїхати">
-                    <button class="square_button">Переглянути ціни</button>
-                </div>
+                {% include 'includes/_hero_form_card.html' %}
             </section>
 
             <section id="services" class="services-section">
@@ -52,81 +26,30 @@
                     <p>Ми пропонуємо рішення для будь-яких потреб: пасажирські поїздки, доставка, вантажне таксі та бізнес-перевезення.</p>
                 </div>
                 <div class="cards-grid">
-                    <div class="card">
-                        <h3 class="card-title">Поїздки</h3>
-                        <p class="card-description">Швидкий виклик авто для повсякденних поїздок. Комфортні класи, чисті автомобілі та професійні водії.</p>
-                        <ul class="card-list">
-                            <li>Подання від 3 хвилин</li>
-                            <li>По місту та передмістю</li>
-                            <li>Оплата готівкою та карткою</li>
-                        </ul>
-                        <button class="card-button">Детальніше</button>
-                    </div>
-                    <div class="card">
-                        <h3 class="card-title">Доставка</h3>
-                        <p class="card-description">Експрес-доставка документів, посилок та особистих речей по місту без зайвих затримок.</p>
-                        <ul class="card-list">
-                            <li>Термінова доставка</li>
-                            <li>Безпечна передача</li>
-                            <li>Відстеження кур'єра</li>
-                        </ul>
-                        <button class="card-button">Детальніше</button>
-                    </div>
-                    <div class="card">
-                        <h3 class="card-title">Вантажне таксі</h3>
-                        <p class="card-description">Переїзд, доставка меблів та великогабаритних вантажів. Є спеціалізовані вантажні автомобілі.</p>
-                        <ul class="card-list">
-                            <li>Місткі фургони</li>
-                            <li>Доставка до дверей</li>
-                            <li>Допомога з навантаженням</li>
-                        </ul>
-                        <button class="card-button">Детальніше</button>
-                    </div>
-                    <div class="card">
-                        <h3 class="card-title">Для бізнесу</h3>
-                        <p class="card-description">Корпоративні поїздки та доставка для компаній з прозорим обліком та підтримкою 24/7.</p>
-                        <ul class="card-list">
-                            <li>Корпоративні тарифи</li>
-                            <li>Щомісячний звіт</li>
-                            <li>Індивідуальні маршрути</li>
-                        </ul>
-                        <button class="card-button">Детальніше</button>
-                    </div>
+                    {% for card in service_cards %}
+                        {% include 'includes/_service_card.html' with card=card %}
+                    {% endfor %}
                 </div>
             </section>
 
-            <section id="about" class="about-section">
+            <section class="contact-section">
                 <div class="about-card">
-                    <h2>Чому обирають Wheels Up?</h2>
-                    <p>Наш сервіс створений для тих, хто цінує свій час. Ми гарантуємо чисті авто, перевірених водіїв, чесні ціни і швидке обслуговування.</p>
-                    <div class="about-features">
-                        <div class="feature-item">
-                            <strong>Безпека</strong>
-                            <p>Щоденний контроль стану автомобілів та перевірка водіїв.</p>
-                        </div>
-                        <div class="feature-item">
-                            <strong>Комфорт</strong>
-                            <p>Сучасні авто, зручні салони та можливість обрати тариф.</p>
-                        </div>
-                        <div class="feature-item">
-                            <strong>Швидкість</strong>
-                            <p>Оптимальні маршрути та блискавичне оформлення замовлень.</p>
-                        </div>
+                    <h2>Ми завжди на зв'язку</h2>
+                    <p>Потрібна допомога чи є питання? Наша служба підтримки доступна 24/7. Зв'яжіться з нами за телефоном, електронною поштою або через форму на сайті.</p>
+                    <a href="{% url 'contacts' %}" class="primary-button">Зв'язатися з нами</a>
+                </div>
+                <div class="app-promo-card">
+                    <h2>Завантажуйте наш застосунок</h2>
+                    <p>Швидке замовлення, відстеження поїздки та зручна оплата в один клік.</p>
+                    <div class="app-buttons">
+                        <button class="app-button">App Store</button>
+                        <button class="app-button">Google Play</button>
                     </div>
                 </div>
             </section>
+{% endblock %}
 
-            <section id="contact" class="contact-section">
-                <h2>Контакти</h2>
-                <p>Пишіть нам або зателефонуйте, якщо потрібна допомога з замовленням або корпоративним обслуговуванням.</p>
-                <div class="contact-details">
-                    <p><strong>Телефон:</strong> +380 67 123 45 67</p>
-                    <p><strong>Email:</strong> info@wheelsup.ua</p>
-                    <p><strong>Адреса:</strong> Київ, вул. Примерна, 10</p>
-                </div>
-            </section>
-        </main>
-
+{% block extra_js %}
         <script>
             // Dropdown menu functionality
             const dropdownBtn = document.querySelector('.dropbtn');
@@ -156,5 +79,4 @@
                 }
             });
         </script>
-    </body>
-</html>
+{% endblock %}

@@ -1,0 +1,184 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Послуги - Wheels Up</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/services.css' %}">
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="header-left">
+                <div class="logo">Wheels Up</div>
+                <p class="tagline">Таксі та доставка, які працюють для вас 24/7</p>
+            </div>
+            <nav class="header-nav">
+                <a href="/" class="nav-tab">Головна</a>
+                <button class="nav-tab active" type="button">Послуги</button>
+                <a href="/about/" class="nav-tab">Про нас</a>
+                <a href="/contacts/" class="nav-tab">Контакти</a>
+            </nav>
+        </header>
+
+        <main class="page-container">
+            <section class="services-hero">
+                <h1>Наші Послуги</h1>
+                <p>Вибір сервісу, який ідеально підходить вашим потребам - від простої поїздки до комплексних корпоративних рішень</p>
+            </section>
+
+            <section class="services-detailed">
+                <div class="service-item">
+                    <div class="service-icon">🚗</div>
+                    <h2>Міські поїздки</h2>
+                    <p>Швидкий та комфортний транспорт для повсякденних поїздок по місту. Наша служба гарантує надійність та безпеку.</p>
+                    <ul class="service-list">
+                        <li>Подання від 3 хвилин</li>
+                        <li>Кваліфіковані та ввічливі водії</li>
+                        <li>Чисті та обслужені автомобілі</li>
+                        <li>Прозорі ціни без прихованих платежів</li>
+                        <li>Доступні усім класам авто</li>
+                    </ul>
+                    <button class="service-button">Замовити</button>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon">📦</div>
+                    <h2>Експрес-доставка</h2>
+                    <p>Гарантована доставка ваших посилок і документів у найкоротший час по місту та передмістю.</p>
+                    <ul class="service-list">
+                        <li>Доставка протягом 30 хвилин</li>
+                        <li>Відстеження кур'єра у реальному часі</li>
+                        <li>Страхування посилок</li>
+                        <li>Безпечна передача адресатові</li>
+                        <li>Гарантія збереження вантажу</li>
+                    </ul>
+                    <button class="service-button">Замовити доставку</button>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon">📦🚚</div>
+                    <h2>Вантажне таксі</h2>
+                    <p>Переїзд, доставка меблів та великогабаритних вантажів з професійною командою вантажників.</p>
+                    <ul class="service-list">
+                        <li>Місткі фургони та вантажники</li>
+                        <li>Допомога з вивантаженням</li>
+                        <li>Упакування матеріалів включено</li>
+                        <li>Швидке та безпечне переміщення</li>
+                        <li>Фіксовані ціни без переплат</li>
+                    </ul>
+                    <button class="service-button">Замовити вантажівку</button>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon">💼</div>
+                    <h2>Бізнес та корпоративні послуги</h2>
+                    <p>Спеціалізовані рішення для компаній та корпоративних потреб з індивідуальним підходом.</p>
+                    <ul class="service-list">
+                        <li>Корпоративні тарифи та знижки</li>
+                        <li>Рахунки та звітність для бухгалтерії</li>
+                        <li>Зарезервовані автомобілі</li>
+                        <li>Підтримка 24/7</li>
+                        <li>Індивідуальні маршрути та графіки</li>
+                    </ul>
+                    <button class="service-button">Деталі для бізнесу</button>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon">🏨</div>
+                    <h2>Трансфери та туризм</h2>
+                    <p>Комфортний транспорт для туристів та бізнес-подорожуючих з досвідченими водіями.</p>
+                    <ul class="service-list">
+                        <li>Забезпечення від аеропорту</li>
+                        <li>Тури по місту</li>
+                        <li>Забезпечення групових поїздок</li>
+                        <li>Вивільнення на готелі та захоплювачі</li>
+                        <li>Багатомовна підтримка</li>
+                    </ul>
+                    <button class="service-button">Замовити трансфер</button>
+                </div>
+
+                <div class="service-item">
+                    <div class="service-icon">⚡</div>
+                    <h2>Термінові послуги</h2>
+                    <p>Максимально швидка реакція для невідкладних потреб - гарантія подання за 5 хвилин.</p>
+                    <ul class="service-list">
+                        <li>Найшвидша реакція у місті</li>
+                        <li>Переважні машини класу Premium</li>
+                        <li>Пріоритетна обробка замовлення</li>
+                        <li>Гарантований водій з рейтингом 4.9+</li>
+                        <li>VIP супровід на потреби</li>
+                    </ul>
+                    <button class="service-button">Замовити терміново</button>
+                </div>
+            </section>
+
+            <section class="pricing-section">
+                <h2>Тарифи</h2>
+                <p>Прозорі та справедливі ціни без прихованих платежів</p>
+                <div class="pricing-grid">
+                    <div class="price-card">
+                        <h3>Economy</h3>
+                        <p class="price-description">Для повсякденних поїздок</p>
+                        <div class="price">від 50 ₴</div>
+                        <ul class="price-features">
+                            <li>Мінімальна вартість поїздки</li>
+                            <li>Оплата готівкою або карткою</li>
+                            <li>Підтримка 24/7</li>
+                        </ul>
+                    </div>
+                    <div class="price-card">
+                        <h3>Comfort</h3>
+                        <p class="price-description">Бізнес-клас комфорту</p>
+                        <div class="price">від 80 ₴</div>
+                        <ul class="price-features">
+                            <li>Премії автомобілі</li>
+                            <li>Вода та закуски</li>
+                            <li>Wi-Fi в авто</li>
+                        </ul>
+                    </div>
+                    <div class="price-card">
+                        <h3>Premium</h3>
+                        <p class="price-description">Люкс послуга</p>
+                        <div class="price">від 120 ₴</div>
+                        <ul class="price-features">
+                            <li>Люкс автомобіль</li>
+                            <li>Персональний водій</li>
+                            <li>VIP супровід</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cta-section">
+                <h2>Готові почати?</h2>
+                <p>Завантажте програму або замовте таксі прямо зараз</p>
+                <div class="cta-buttons">
+                    <button class="primary-button">Замовити таксі</button>
+                    <button class="secondary-button">Звантажити додаток</button>
+                </div>
+            </section>
+
+            <section class="registration-section">
+                <div class="registration-container">
+                    <h2>Готові почати?</h2>
+                    <p>Виберіть роль та зареєструйтеся прямо зараз</p>
+                    <div class="registration-buttons">
+                        <div class="reg-card">
+                            <div class="reg-icon">🛑</div>
+                            <h3>Заказчик</h3>
+                            <p>Замовляйте такси та доставку в два клаші</p>
+                            <a href="{% url 'register_customer' %}" class="btn-register">Реєстрація</a>
+                        </div>
+                        <div class="reg-card">
+                            <div class="reg-icon">🚗</div>
+                            <h3>Водій</h3>
+                            <p>Приєднайтеся до нашої команди та заробляйте</p>
+                            <a href="{% url 'register_driver' %}" class="btn-register">Реєстрація</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>

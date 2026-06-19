@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Вхід - Wheels Up</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/auth.css' %}">
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="header-left">
+                <a href="/" class="logo-link">
+                    <div class="logo">Wheels Up</div>
+                    <p class="tagline">Таксі та доставка, які працюють для вас 24/7</p>
+                </a>
+            </div>
+        </header>
+
+        <main class="auth-container">
+            <div class="auth-card">
+                <h1>Вхід</h1>
+                <p class="subtitle">Введіть вашу email та пароль</p>
+
+                {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <form method="POST" class="auth-form">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="your@email.com" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Пароль</label>
+                        <input type="password" id="password" name="password" required placeholder="Ваш пароль" class="form-control">
+                    </div>
+
+                    <button type="submit" class="btn-primary">Увійти</button>
+                </form>
+
+                <div class="auth-divider">або</div>
+
+                <div class="register-options">
+                    <p class="register-label">Ви новий користувач?</p>
+                    <div class="register-buttons">
+                        <a href="{% url 'register_customer' %}" class="btn btn-customer">Я заказчик</a>
+                        <a href="{% url 'register_driver' %}" class="btn btn-driver">Я водій</a>
+                        <a href="{% url 'register_admin' %}" class="btn btn-admin">Я адміністратор</a>
+                    </div>
+                </div>
+
+                <div class="auth-footer">
+                    <a href="/">← Повернутися на головну</a>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

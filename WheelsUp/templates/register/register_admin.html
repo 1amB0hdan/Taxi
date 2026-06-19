@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Реєстрація Адміністратора - Wheels Up</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/auth.css' %}">
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="header-left">
+                <a href="/" class="logo-link">
+                    <div class="logo">Wheels Up</div>
+                    <p class="tagline">Таксі та доставка, які працюють для вас 24/7</p>
+                </a>
+            </div>
+        </header>
+
+        <main class="auth-container">
+            <div class="auth-card">
+                <h1>🔐 Реєстрація Адміністратора</h1>
+                <p class="subtitle">Тільки уповноважені особи можуть зареєструватися</p>
+
+                {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <form method="POST" class="auth-form">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="id_email">Email *</label>
+                        {{ form.email }}
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="id_first_name">Ім'я *</label>
+                            {{ form.first_name }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_last_name">Прізвище *</label>
+                            {{ form.last_name }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_phone">Телефон *</label>
+                        {{ form.phone }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_admin_code">Адмін-код *</label>
+                        {{ form.admin_code }}
+                        <small class="form-text">Введіть адмін-код для реєстрації</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_password1">Пароль *</label>
+                        {{ form.password1 }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_password2">Підтвердіть пароль *</label>
+                        {{ form.password2 }}
+                    </div>
+
+                    <button type="submit" class="btn-primary">Зареєструватися як Адміністратор</button>
+                </form>
+
+                <div class="auth-footer">
+                    <p>Вже маєте акаунт? <a href="{% url 'login' %}">Увійти</a></p>
+                    <p><a href="/">← Повернутися на головну</a></p>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,10 @@
+<div class="card">
+    <h3 class="card-title">{{ card.title }}</h3>
+    <p class="card-description">{{ card.description }}</p>
+    <ul class="card-list">
+        {% for item in card.list_items %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'services' %}" class="card-button">Детальніше</a>
+</div>
