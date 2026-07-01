@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Кабінет Водія - Wheels Up</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/dashboard.css' %}">
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="header-left">
+                <a href="/" class="logo">Wheels Up</a>
+            </div>
+            <nav class="header-nav">
+                <span class="user-info">👤 {{ user.first_name }} {{ user.last_name }}</span>
+                <span class="rating">⭐ {{ profile.rating }}/5.0</span>
+                {% if unread_count %}
+                    <a href="{% url 'notifications' %}" class="notifications-badge">
+                        🔔 {{ unread_count }}
+                    </a>
+                {% endif %}
+                <a href="{% url 'profile' %}" class="nav-link">Профіль</a>
+                <a href="{% url 'logout' %}" class="nav-link logout">Вихід</a>
+            </nav>
+        </header>
+
+        <main class="dashboard-container">
+            <div class="sidebar">
+                <div class="sidebar-menu">
+                    <a href="{% url 'driver_dashboard' %}" class="menu-item active">📊 Кабінет</a>
+                    <a href="#pending-orders" class="menu-item">📋 Доступні Замовлення</a>
+                    <a href="#my-orders" class="menu-item">🚗 Мої Замовлення</a>
+                    <a href="{% url 'notifications' %}" class="menu-item">🔔 Сповіщення</a>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <section class="hero-section">
+                    <h1>Добро пожалувати, водію! 🚗</h1>
+                    <p>Ваш особистий кабінет для управління замовленнями</p>
+                </section>
+
+                <section class="stats-section">
+                    <div class="stat-card">
+                        <div class="stat-number">{{ my_orders|length }}</div>
+                        <div class="stat-label">Активних Замовлень</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">{{ profile.rating }}</div>
+                        <div class="stat-label">Ваш Рейтинг</div>
+                    </div>
+                </section>
+
+                <section class="orders-section" id="pending-orders">
+                    <h2>📋 Доступні Замовлення</h2>
+                    {% if pending_orders %}
+                        <div class="orders-list">
+                            {% for order in pending_orders %}
+                                <div class="order-card pending">
+                                    <div class="order-header">
+                                        <h3>Замовлення #{{ order.id }}</h3>
+                                        <span class="status-badge status-pending">{{ order.get_status_display }}</span>
+                                    </div>
+                                    <div class="order-info">
+                                        <div class="info-item">
+                                            <span class="label">Заказчик:</span>
+                                            <span class="value">{{ order.customer.first_name }} {{ order.customer.last_name }}</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="label">Звідки:</span>
+                                            <span class="value">{{ order.pickup_location }}</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="label">Куди:</span>
+                                            <span class="value">{{ order.dropoff_location }}</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="label">Тип:</span>
+                                            <span class="value">{{ order.get_service_type_display }}</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="label">Телефон:</span>
+                                            <span class="value">{{ order.customer.profile.phone }}</span>
+                                        </div>
+                                    </div>
+                                    <form method="POST" action="{% url 'accept_order' order.id %}" class="order-actions">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn-success">✓ Прийняти Замовлення</button>
+                                    </form>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="empty-state">
+                            <p>📭 Немає доступних замовлень</p>
+                            <p>Перевіряйте часто!</p>
+                        </div>
+                    {% endif %}
+                </section>
+
+                <section class="orders-section" id="my-orders">
+                    <h2>🚗 Ваші Замовлення</h2>
+                    {% if my_orders %}
+                        <div class="orders-list">
+                            {% for order in my_orders %}
+                                <div class="order-card">
+                                    <div class="order-header">
+                                        <h3>Замовлення #{{ order.id }}</h3>
+                                        <span class="status-badge status-{{ order.status }}">{{ order.get_status_display }}</span>
+                                    </div>
+                                    <div class="order-info">
+                                        <div class="info-item">
+                                            <span class="label">Заказчик:</span>
+                                            <span class="value">{{ order.customer.first_name }} {{ order.customer.last_name }}</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="label">Звідки:</span>
+                                            <span class="value">{{ order.pickup_location }}</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="label">Куди:</span>
+                                            <span class="value">{{ order.dropoff_location }}</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="label">Телефон заказчика:</span>
+                                            <span class="value">{{ order.customer.profile.phone }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="order-actions">
+                                        {% if order.status == 'accepted' or order.status == 'in_progress' %}
+                                            <form method="POST" action="{% url 'complete_order' order.id %}" style="display: inline;">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn-primary">✓ Завершити Замовлення</button>
+                                            </form>
+                                        {% endif %}
+                                        <a href="{% url 'order_detail' order.id %}" class="btn-secondary">Деталі</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="empty-state">
+                            <p>🎯 У вас немає активних замовлень</p>
+                            <p>Йдіть вверх та прийміть нове замовлення!</p>
+                        </div>
+                    {% endif %}
+                </section>
+            </div>
+        </main>
+    </body>
+</html>

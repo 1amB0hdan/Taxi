@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - Wheels Up{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css' %}">
+    <style>
+        .dropdown {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            width: 100%;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            z-index: 10;
+            margin-top: 5px;
+            padding: 5px 0;
+            list-style: none;
+        }
+        .dropdown-content li {
+            padding: 12px 16px;
+            cursor: pointer;
+            font-size: 15px;
+            color: #333;
+        }
+        .dropdown-content li:hover {
+            background-color: #f5f5f5;
+        }
+        .dropdown.active .dropdown-content {
+            display: block;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+            <section id="hero" class="hero-section">
+                <div class="hero-copy">
+                    <h1>Wheels Up Taxi Service</h1>
+                    <p>Швидкі, безпечні поїздки по місту, термінова доставка і вантажні перевезення. Обирай комфортний сервіс для себе та свого бізнесу.</p>
+                    <div class="hero-actions">
+                        <a href="#order-form" class="primary-button">Замовити зараз</a>
+                        <a href="{% url 'services' %}" class="secondary-button">Дізнатися більше</a>
+                    </div>
+                </div>
+                
+                <div id="order-form">
+                    <form method="POST" action="{% url 'create_order' %}" style="margin: 0; padding: 0;">
+                        {% csrf_token %}
+                        
+                        <div class="hero-form-card" style="background: #fff; padding: 25px; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.05); width: 100%; max-width: 400px; font-family: Arial, sans-serif; box-sizing: border-box;">
+                            <h3 style="margin-top: 0; margin-bottom: 20px; font-size: 22px; color: #000; font-weight: bold;">Замовити таксі</h3>
+                            
+                            <div class="dropdown">
+                                <button type="button" class="dropbtn" style="width: 100%; padding: 14px; background: #111; color: #fff; border: none; border-radius: 8px; text-align: left; font-size: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
+                                    <span id="selected-time">Забрати зараз</span> ▽
+                                </button>
+                                <input type="hidden" name="order_time" id="order-time-input" value="Зараз">
+                                
+                                <ul class="dropdown-content">
+                                    <li data-value="Зараз">Забрати зараз</li>
+                                    <li data-value="Через 15 хв">Через 15 хв</li>
+                                    <li data-value="Через 30 хв">Через 30 хв</li>
+                                    <li data-value="На конкретний час">На конкретний час</li>
+                                </ul>
+                            </div>
+
+                            <div style="margin-bottom: 15px;">
+                                <input type="text" 
+                                       name="pickup_location" 
+                                       placeholder="Точка відправлення" 
+                                       required 
+                                       style="width: 100%; padding: 14px; border: 1px solid #eee; background: #f5f5f5; border-radius: 8px; font-size: 15px; box-sizing: border-box; color: #333;">
+                            </div>
+
+                            <div style="margin-bottom: 20px;">
+                                <input type="text" 
+                                       name="dropoff_location" 
+                                       placeholder="Куди поїхати" 
+                                       required 
+                                       style="width: 100%; padding: 14px; border: 1px solid #eee; background: #f5f5f5; border-radius: 8px; font-size: 15px; box-sizing: border-box; color: #333;">
+                            </div>
+
+                            <button type="submit" style="width: 100%; padding: 14px; background: #000; color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; transition: background 0.2s;">
+                                Замовити зараз
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section id="services" class="services-section">
+                <div class="section-heading">
+                    <h2>Наші сервіси</h2>
+                    <p>Ми пропонуємо рішення для будь-яких потреб: пасажирські поїздки, доставка, вантажне таксі та бізнес-перевезення.</p>
+                </div>
+                <div class="cards-grid">
+                    {% for card in service_cards %}
+                        {% include 'includes/_service_card.html' with card=card %}
+                    {% endfor %}
+                </div>
+            </section>
+
+            <section class="contact-section">
+                <div class="about-card">
+                    <h2>Ми завжди на зв'язку</h2>
+                    <p>Потрібна допомога чи є питання? Наша служба підтримки доступна 24/7. Зв'яжіться з нами за телефоном, електронною поштою або через форму на сайті.</p>
+                    <h2> </h2>
+                    <h2> </h2>
+                    <h2> </h2>
+                    <h2> </h2>
+                    <h2> </h2>
+                    <a href="{% url 'contacts' %}" class="primary-button">Зв'язатися з нами</a>
+                </div>
+            </section>
+{% endblock %}
+
+{% block extra_js %}
+        <script>
+            const dropdown = document.querySelector('.dropdown');
+            const dropdownBtn = document.querySelector('.dropbtn');
+            const dropdownText = document.getElementById('selected-time');
+            const dropdownItems = document.querySelectorAll('.dropdown-content li');
+            const hiddenInput = document.getElementById('order-time-input');
+
+            if (dropdownBtn && dropdown) {
+                dropdownBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    dropdown.classList.toggle('active');
+                });
+
+                dropdownItems.forEach(item => {
+                    item.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const value = this.getAttribute('data-value');
+                        const text = this.textContent;
+                        
+                        dropdownText.textContent = text;
+                        hiddenInput.value = value;
+                        
+                        dropdown.classList.remove('active');
+                    });
+                });
+
+                document.addEventListener('click', function(e) {
+                    if (!dropdown.contains(e.target)) {
+                        dropdown.classList.remove('active');
+                    }
+                });
+            }
+        </script>
+{% endblock %}

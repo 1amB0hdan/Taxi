@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ title }} - Wheels Up</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/auth.css' %}">
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="header-left">
+                <a href="{% url 'home' %}" class="logo-link">
+                    <div class="logo">Wheels Up</div>
+                    <p class="tagline">Таксі та доставка, які працюють для вас 24/7</p>
+                </a>
+            </div>
+            <nav class="header-nav">
+                <a href="{% url 'home' %}" class="nav-tab">Головна</a>
+                <a href="{% url 'services' %}" class="nav-tab">Послуги</a>
+                <a href="{% url 'about' %}" class="nav-tab">Про нас</a>
+                <a href="{% url 'contacts' %}" class="nav-tab">Контакти</a>
+                <a href="{% url 'login' %}" class="nav-tab">Войти</a>
+            </nav>
+        </header>
+
+        <main class="auth-container">
+            <section class="auth-card">
+                <p class="eyebrow">Wheels Up</p>
+                <h1>{{ title }}</h1>
+                <p class="subtitle">{{ subtitle }}</p>
+
+                {% if form.non_field_errors %}
+                    <div class="alert alert-error">{{ form.non_field_errors.0 }}</div>
+                {% endif %}
+
+                <form method="POST" class="auth-form" novalidate>
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+                        {{ form.username }}
+                        {% if form.username.errors %}
+                            <span class="error">{{ form.username.errors.0 }}</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                            <span class="error">{{ form.email.errors.0 }}</span>
+                        {% endif %}
+                    </div>
+
+                    {% if role_locked %}
+                        {{ form.role.as_hidden }}
+                    {% else %}
+                        <div class="form-group">
+                            <label for="{{ form.role.id_for_label }}">{{ form.role.label }}</label>
+                            {{ form.role }}
+                            {% if form.role.errors %}
+                                <span class="error">{{ form.role.errors.0 }}</span>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+
+                    <div class="form-group">
+                        <label for="{{ form.password1.id_for_label }}">Пароль</label>
+                        {{ form.password1 }}
+                        {% if form.password1.errors %}
+                            <span class="error">{{ form.password1.errors.0 }}</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.password2.id_for_label }}">Підтвердження пароля</label>
+                        {{ form.password2 }}
+                        {% if form.password2.errors %}
+                            <span class="error">{{ form.password2.errors.0 }}</span>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn-primary">{{ button }}</button>
+                </form>
+
+                <div class="auth-footer">
+                    Вже маєте акаунт? <a href="{% url 'login' %}">Войти</a>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>

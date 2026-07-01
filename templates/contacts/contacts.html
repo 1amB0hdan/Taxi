@@ -1,0 +1,241 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Контакти - Wheels Up</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/contacts.css' %}">
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="header-left">
+                <div class="logo">Wheels Up</div>
+                <p class="tagline">Таксі та доставка, які працюють для вас 24/7</p>
+            </div>
+            <nav class="header-nav">
+                <a href="/" class="nav-tab">Головна</a>
+                <a href="/services/" class="nav-tab">Послуги</a>
+                <a href="/about/" class="nav-tab">Про нас</a>
+                <button class="nav-tab active" type="button">Контакти</button>
+                <a href="/accounts/login/" class="nav-tab">Увійти</a>
+            </nav>
+        </header>
+
+        <main class="page-container">
+            <section class="contacts-hero">
+                <h1>Контактуйте з Нами</h1>
+                <p>Ми тут для вас 24 години на день, 7 днів на тиждень. Виберіть зручний спосіб зв'язку</p>
+            </section>
+
+            <section class="contact-methods">
+                <div class="contact-card">
+                    <div class="contact-icon">📞</div>
+                    <h2>Телефон</h2>
+                    <p class="contact-label">Гарячої лінія (24/7):</p>
+                    <a href="tel:+380123456789" class="contact-link">+38 (012) 345-67-89</a>
+                    <p class="contact-label">Офіс (пн-пт, 09:00-18:00):</p>
+                    <a href="tel:+380987654321" class="contact-link">+38 (098) 765-43-21</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">✉️</div>
+                    <h2>Email</h2>
+                    <p class="contact-label">Загальні запитання:</p>
+                    <a href="mailto:info@wheelsup.ua" class="contact-link">info@wheelsup.ua</a>
+                    <p class="contact-label">Технічна підтримка:</p>
+                    <a href="mailto:support@wheelsup.ua" class="contact-link">support@wheelsup.ua</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <h2>Адреса</h2>
+                    <p class="contact-label">Головний офіс:</p>
+                    <p class="contact-text">вул. Хрещатик, 25<br>м. Київ, 01001<br>Україна</p>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">⏰</div>
+                    <h2>Режим роботи</h2>
+                    <p class="contact-label">Служба замовлень:</p>
+                    <p class="contact-text">24 години, 7 днів на тиждень</p>
+                    <p class="contact-label">Офіс:</p>
+                    <p class="contact-text">пн-пт: 09:00 - 18:00<br>сб-нд: 10:00 - 16:00</p>
+                </div>
+            </section>
+
+            <section class="social-section">
+                <h2>Слідкуйте за Нами</h2>
+                <p>Останні новини, пропозиції та оновлення</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">
+                        <span class="social-icon">📘</span>
+                        <span>Facebook</span>
+                    </a>
+                    <a href="#" class="social-link">
+                        <span class="social-icon">📷</span>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="#" class="social-link">
+                        <span class="social-icon">𝕏</span>
+                        <span>Twitter</span>
+                    </a>
+                    <a href="#" class="social-link">
+                        <span class="social-icon">▶️</span>
+                        <span>YouTube</span>
+                    </a>
+                    <a href="#" class="social-link">
+                        <span class="social-icon">💬</span>
+                        <span>Telegram</span>
+                    </a>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <h2>Надішліть нам повідомлення</h2>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Ваше ім'я *</label>
+                        <input type="text" id="name" name="name" required placeholder="Повне ім'я">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required placeholder="your@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Телефон</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+38 (XXX) XXX-XX-XX">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Тема *</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Виберіть тему</option>
+                            <option value="general">Загальний запит</option>
+                            <option value="complaint">Скарга</option>
+                            <option value="partnership">Партнерство</option>
+                            <option value="media">ЗМІ запит</option>
+                            <option value="other">Інше</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Повідомлення *</label>
+                        <textarea id="message" name="message" rows="6" required placeholder="Опишіть вашу проблему або запит..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-button">Надіслати повідомлення</button>
+                </form>
+            </section>
+
+            <section class="faq-section">
+                <h2>Часті Запитання</h2>
+                <div class="faq-items">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Як замовити таксі?</span>
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Ви можете замовити таксі через наш мобільний додаток, веб-сайт або зателефонувавши на номер 1919. Просто вкажіть місце відправлення та пункт призначення, і ми знайдемо найближчого водія.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Які способи оплати ви приймаєте?</span>
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Ми приймаємо готівку, кредитні та дебетові карти, мобільні платежі та е-гаманці. Виберіть зручний для вас спосіб при замовленні.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Які ціни на поїздки?</span>
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Ціни залежать від класу автомобіля та відстані поїздки. Ви можете побачити приблизну вартість перед замовленням. Немає прихованих платежів.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Чи безпечно користуватись Wheels Up?</span>
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Так, безпека - наш пріоритет. Усі водії мають ліцензії та проходять перевірку безпеки. Усі автомобілі регулярно обслуговуються та застраховані.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Як скасувати замовлення?</span>
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Ви можете скасувати замовлення в додатку до прибуття водія. Якщо водій вже близько, може стягуватися комісія скасування.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Де я можу залишити відгук?</span>
+                            <span class="faq-toggle">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Ви можете залишити відгук прямо в додатку після завершення поїздки. Ваша думка допомагає нам покращувати сервіс. Дякуємо!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <script>
+            document.querySelectorAll('.faq-question').forEach(button => {
+                button.addEventListener('click', function() {
+                    const faqItem = this.closest('.faq-item');
+                    const answer = faqItem.querySelector('.faq-answer');
+                    const toggle = this.querySelector('.faq-toggle');
+                    
+                    faqItem.classList.toggle('active');
+                    toggle.textContent = faqItem.classList.contains('active') ? '−' : '+';
+                });
+            });
+        </script>
+        {% block extra_js %}{% endblock %}
+        <footer class="main-footer">
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <h2>Wheels Up</h2>
+                    <p>Швидкі та безпечні поїздки по місту, термінова доставка та вантажні перевезення. Працюємо для вас 24/7.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Навігація</h3>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Головна</a></li>
+                        <li><a href="{% url 'services' %}">Послуги</a></li>
+                        <li><a href="{% url 'contacts' %}">Контакти</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contacts">
+                    <h3>Контакти</h3>
+                    <p>📞 +38 (012) 345-67-89</p>
+                    <p>✉️ info@wheelsup.ua</p>
+                    <p>📍 Україна, твоє місто</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Wheels Up Taxi Service. Всі права захищено.</p>
+            </div>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Створення Замовлення - Wheels Up</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/orders.css' %}">
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="header-left">
+                <a href="/" class="logo">Wheels Up</a>
+            </div>
+            <nav class="header-nav">
+                <a href="{% url 'dashboard' %}" class="nav-link">← Назад в Кабінет</a>
+                <a href="{% url 'logout' %}" class="nav-link logout">Вихід</a>
+            </nav>
+        </header>
+
+        <main class="order-container">
+            <div class="order-card">
+                <h1>➕ Створення Замовлення</h1>
+                <p class="subtitle">Заповніть форму для нового замовлення</p>
+
+                {% if messages %}
+                    <div class="messages">
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <form method="POST" class="order-form">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="id_pickup_location">Звідки? (Точка відправлення) *</label>
+                        {{ form.pickup_location }}
+                        {% if form.pickup_location.errors %}
+                            <span class="error">{{ form.pickup_location.errors.0 }}</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_dropoff_location">Куди? (Пункт призначення) *</label>
+                        {{ form.dropoff_location }}
+                        {% if form.dropoff_location.errors %}
+                            <span class="error">{{ form.dropoff_location.errors.0 }}</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_service_type">Тип Послуги *</label>
+                        {{ form.service_type }}
+                        {% if form.service_type.errors %}
+                            <span class="error">{{ form.service_type.errors.0 }}</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="service-info">
+                        <div class="service-item">
+                            <h4>🚗 Economy</h4>
+                            <p>від 50 ₴</p>
+                            <small>Бюджетний варіант</small>
+                        </div>
+                        <div class="service-item">
+                            <h4>🚙 Comfort</h4>
+                            <p>від 80 ₴</p>
+                            <small>Комфортна поїздка</small>
+                        </div>
+                        <div class="service-item">
+                            <h4>🚕 Premium</h4>
+                            <p>від 120 ₴</p>
+                            <small>Люкс послуга</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_notes">Додаткова Інформація (опціонально)</label>
+                        {{ form.notes }}
+                        {% if form.notes.errors %}
+                            <span class="error">{{ form.notes.errors.0 }}</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">✓ Замовити Таксі</button>
+                        <a href="{% url 'dashboard' %}" class="btn-secondary">← Скасувати</a>
+                    </div>
+                </form>
+            </div>
+        </main>
+        {% block extra_js %}{% endblock %}
+        <footer class="main-footer">
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <h2>Wheels Up</h2>
+                    <p>Швидкі та безпечні поїздки по місту, термінова доставка та вантажні перевезення. Працюємо для вас 24/7.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Навігація</h3>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Головна</a></li>
+                        <li><a href="{% url 'services' %}">Послуги</a></li>
+                        <li><a href="{% url 'contacts' %}">Контакти</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contacts">
+                    <h3>Контакти</h3>
+                    <p>📞 +38 (012) 345-67-89</p>
+                    <p>✉️ info@wheelsup.ua</p>  
+                    <p>📍 Україна, твоє місто</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Wheels Up Taxi Service. Всі права захищено.</p>
+            </div>
+        </footer>
+    </body>
+</html>

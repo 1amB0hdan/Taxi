@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Panel - Orders</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
+        .container { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+        h1 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        
+        /* Стилізуємо наші нові кнопки, щоб вони виглядали як на макеті */
+        .btn { padding: 6px 12px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; font-size: 14px; text-decoration: none; display: inline-block; text-align: center; color: black; background: #fff; }
+        .btn:hover { background-color: #eee; }
+        .btn-disabled { background-color: #f5f5f5; color: #aaa; cursor: not-allowed; border-color: #ddd; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>Driver Panel - Orders</h1>
+            <a href="{% url 'logout' %}" class="btn" style="background: #000; color: #fff;">Вийти</a>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer Name</th>
+                    <th>Pickup Location</th>
+                    <th>Dropoff Location</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>#{{ order.id }}</td>
+                    <td>{{ order.client.username }}</td>
+                    <td>{{ order.pickup_location }}</td>
+                    <td>{{ order.dropoff_location }}</td>
+                    <td>
+                        <span style="font-weight: bold; 
+                            {% if order.status == 'Pending' %}color: #e67e22;
+                            {% elif order.status == 'Accepted' %}color: #2980b9;
+                            {% else %}color: #27ae60;{% endif %}">
+                            {{ order.status }}
+                        </span>
+                    </td>
+                    <td>
+                        {% if order.status == 'Pending' %}
+                            <a href="{% url 'driver_take_order' order.id %}" class="btn">Accept</a>
+                        
+                        {% elif order.status == 'Accepted' %}
+                            <a href="{% url 'driver_complete_order' order.id %}" class="btn" style="border-color: #27ae60; color: #27ae60;">Complete</a>
+                        
+                        {% else %}
+                            <span class="btn btn-disabled">View Details</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" style="text-align: center; color: #777; padding: 20px;">
+                        Наразі немає активних замовлень у базі даних.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
